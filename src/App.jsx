@@ -5,6 +5,7 @@ import "./index.css";
 import confetti from "canvas-confetti";
 import { TURNS } from "./components/constants";
 import { checkWinner } from "./logica/board";
+import { WinnerModal } from "./components/WinnerModal";
 
 function App() {
   const [board, setBoard] = useState(Array(9).fill(null));
@@ -62,19 +63,7 @@ function App() {
         <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
       </section>
 
-      {winner !== null && (
-        <section className="winner">
-          <div className="text">
-            <h2>{winner === false ? `Empate` : `Ganó: `}</h2>
-            <header className="win">
-              {winner && <Square>{winner}</Square>}
-            </header>
-            <footer>
-              <button onClick={resetGame}>Empezar de nuevo</button>
-            </footer>
-          </div>
-        </section>
-      )}
+      <WinnerModal resetGame={resetGame} winner={winner} />
     </main>
   );
 }
