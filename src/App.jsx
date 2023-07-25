@@ -3,7 +3,8 @@ import { useState } from "react";
 import "./App.css";
 import "./index.css";
 import confetti from "canvas-confetti";
-import { TURNS, WINNER_COMBOS } from "./components/constants";
+import { TURNS } from "./components/constants";
+import { checkWinner } from "./logica/board";
 
 function App() {
   const [board, setBoard] = useState(Array(9).fill(null));
@@ -11,20 +12,6 @@ function App() {
   const [turn, setTurn] = useState(TURNS.X);
 
   const [winner, setWinner] = useState(null);
-
-  const checkWinner = (boardToCheck) => {
-    for (const combo of WINNER_COMBOS) {
-      const [a, b, c] = combo;
-      if (
-        boardToCheck[a] &&
-        boardToCheck[a] === boardToCheck[b] &&
-        boardToCheck[a] === boardToCheck[c]
-      ) {
-        return boardToCheck[a];
-      }
-    }
-    return null;
-  };
 
   const resetGame = () => {
     setBoard(Array(9).fill(null));
